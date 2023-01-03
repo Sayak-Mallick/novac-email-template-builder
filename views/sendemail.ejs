@@ -1,0 +1,74 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Send Email Template</h4>
+    </div>
+    <div class="card-body">
+<form action="/postEmail" method="POST">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="firstname">To</label>
+                        <input type="text" class="form-control"  type="email" name="to" id="name" required placeholder="TO:" >
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="firstname">Subject</label>
+                        <input type="text" class="form-control"  name="subject" placeholder="Subject:" id="subject" required placeholder="Subject: ">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="firstname">CC</label>
+                        <input type="text" class="form-control" type="email" name="cc" id="name" required placeholder="CC:" >
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="firstname">BCC</label>
+                        <input type="text" class="form-control" type="email" name="bcc" id="name" required placeholder="BCC:" >
+                    </div>
+                </div>
+
+                <!-- <div class="col-12">
+                    <div class="form-group">
+                        <label for="addres">Body</label>
+                        <textarea class="form-control" name="body" id="body" cols="20" rows="5" placeholder="Body:"></textarea>
+                    </div>
+                </div> -->
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="cars">Choose a Template</label>                        
+                        <select name="templates" id="templates">
+                            <% if(emails.length> 0) { %>
+                                <% for(let email of emails) { %>
+                                    <option value=<%= email.template_content %>><%= email.name %></option>
+                                     <h1>Sayak Mallick</h1>   
+                                    <% } %>
+                                <% }%>                    
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="cars">Preview</label>                        
+                        
+                            <% if(emails.length> 0) { %>
+                                <% for(let email of emails) { %>
+                                    <br><br>
+                                    <option value=><%= email.name %></option>
+                                     <iframe srcdoc="<%= email.template_content_modified %>" height="300px" frameborder="0"></iframe>
+                                    <br>
+                                     <% } %>
+                                <% }%>                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a href="/" class="btn btn-light">Go back</a>
+            </div>
+        </form>
+    </div>
+</div>
