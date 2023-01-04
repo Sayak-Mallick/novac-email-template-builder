@@ -5,8 +5,8 @@ const { getAllTemplates, getAddTemplateView, addTemplate,
 
 const router = express.Router();
 
-router.get('/', getAllTemplates);
-router.get('/sendEmail', sendEmail);
+router.get('/list', getAllTemplates);
+router.get('/', sendEmail);
 router.post('/postEmail', postEmail);
 router.get('/addTemplate', getAddTemplateView);
 router.post('/addTemplate', addTemplate);

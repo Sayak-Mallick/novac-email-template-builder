@@ -82,10 +82,9 @@ const postEmail = (req, res) => {
     var to, cc, bcc, subject, body, templates;
     to = req.body.to
     cc = req.body.cc,
-        bcc = req.body.bcc,
-        subject = req.body.subject
+    bcc = req.body.bcc,
+    subject = req.body.subject
     body = req.body.body
-    // templates = nodeBase64.encode(req.body.templates);
     templates = req.body.templates;
 
     console.log("Email was sent to:- " + to)
@@ -97,7 +96,7 @@ const postEmail = (req, res) => {
 
 
     var transporter = nodemailer.createTransport({
-        host: 'smtp.rediffmailpro.com',
+        host: config.sm,
         port: 587,
         secure: false,
         auth: {
