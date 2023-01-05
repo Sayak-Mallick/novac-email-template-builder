@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="title" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>Novac Builder</title>
+
+    <!-- Le styles -->
+    <link href="css/bootstrap-combined.min.css" rel="stylesheet" />
+    <link href="css/layoutit.css" rel="stylesheet" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="icon" href="https://www.novactech.in/favicon.ico" />
+
+    <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+    <!--[if lt IE 9]>
+      <script
+        type="text/javascript"
+        src="http://code.jquery.com/jquery-1.9.1.min.js"
+      ></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script
+      type="text/javascript"
+      src="js/jquery.ui.touch-punch.min.js"
+    ></script>
+    <script type="text/javascript" src="js/jquery.htmlClean.js"></script>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="ckeditor/config.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+  </head>
+
+  <body style="min-height: 660px; cursor: auto" class="edit">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button
+            data-target=".nav-collapse"
+            data-toggle="collapse"
+            class="btn btn-navbar"
+            type="button"
+          >
+            <span class="icon-bar"></span> <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="http://justjavac.com/tools/layoutit/"
+            ><img src="https://www.novactech.in/favicon.ico" />NOVAC<span
+              class="label"
+              >BETA</span
+            ></a
+          >
+          <div class="nav-collapse collapse">
+            <ul class="nav" id="menu-layoutit">
+              <li class="divider-vertical"></li>
+              <li>
+                <div class="btn-group">
+                  <a class="btn btn-primary" href="#" target="_blank"
+                    ><i class="icon-home icon-white"></i>Home page</a
+                  >
+                </div>
+                <div class="btn-group" data-toggle="buttons-radio">
+                  <button
+                    type="button"
+                    id="edit"
+                    class="btn btn-primary active"
+                  >
+                    <i class="icon-edit icon-white"></i>edit
+                  </button>
+                  <button type="button" class="btn btn-primary" id="devpreview">
+                    <i class="icon-eye-close icon-white"></i>Layout edit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="sourcepreview"
+                  >
+                    <i class="icon-eye-open icon-white"></i>Preview
+                  </button>
+                </div>
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-target="#downloadModal"
+                    rel="/build/downloadModal"
+                    role="button"
+                    data-toggle="modal"
+                  >
+                    <i class="icon-chevron-down icon-white"></i>download
+                  </button>
+                  <button
+                    class="btn btn-primary"
+                    href="/share/index"
+                    role="button"
+                    data-toggle="modal"
+                    data-target="#shareModal"
+                  >
+                    <i class="icon-share icon-white"></i>Save
+                  </button>
+                  <button class="btn btn-primary" href="#clear" id="clear">
+                    <i class="icon-trash icon-white"></i>CLEAR PAGE
+                  </button>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-primary" href="#undo" id="undo">
+                    <i class="icon-arrow-left icon-white"></i>UNDO
+                  </button>
+                  <button class="btn btn-primary" href="#redo" id="redo">
+                    <i class="icon-arrow-right icon-white"></i>REDO
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="">
+          <div class="sidebar-nav">
+            <ul class="nav nav-list accordion-group">
+              <li class="nav-header">
+                <div class="pull-right popover-info">
+                  <i class="icon-question-sign"></i>
+                  <div class="popover fade right">
+                    <div class="arrow"></div>
+                    <h3 class="popover-title">Function</h3>
+                    <div class="popover-content">
+                      Set your grid layout here, The total number of grids
+                      defaults to 12,Segment the grid value of each column with
+                      an empty grid. If you need to know more information,
+                      please visit<a
+                        target="_blank"
+                        href="http://twitter.github.io/bootstrap/scaffolding.html#gridSystem"
+                        >Bootstrap</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <i class="icon-plus icon-white"></i>Layout Settings
+              </li>
+              <li style="display: list-item" class="rows" id="estRows">
+                <div class="lyrow ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <div class="preview">
+                    <input value="12" type="text" />
+                  </div>
+                  <div class="view">
+                    <div class="row-fluid clearfix">
+                      <div class="span12 column"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lyrow ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <div class="preview">
+                    <input value="6 6" type="text" />
+                  </div>
+                  <div class="view">
+                    <div class="row-fluid clearfix">
+                      <div class="span6 column"></div>
+                      <div class="span6 column"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lyrow ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <div class="preview">
+                    <input value="8 4" type="text" />
+                  </div>
+                  <div class="view">
+                    <div class="row-fluid clearfix">
+                      <div class="span8 column"></div>
+                      <div class="span4 column"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lyrow ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <div class="preview">
+                    <input value="4 4 4" type="text" />
+                  </div>
+                  <div class="view">
+                    <div class="row-fluid clearfix">
+                      <div class="span4 column"></div>
+                      <div class="span4 column"></div>
+                      <div class="span4 column"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lyrow ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <div class="preview">
+                    <input value="2 6 4" type="text" />
+                  </div>
+                  <div class="view">
+                    <div class="row-fluid clearfix">
+                      <div class="span2 column"></div>
+                      <div class="span6 column"></div>
+                      <div class="span4 column"></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="nav nav-list accordion-group">
+              <li class="nav-header">
+                <i class="icon-plus icon-white"></i> Basic CSS
+                <div class="pull-right popover-info">
+                  <i class="icon-question-sign"></i>
+                  <div class="popover fade right">
+                    <div class="arrow"></div>
+                    <h3 class="popover-title">help</h3>
+                    <div class="popover-content">
+                      A series of basic element styles are provided here. You
+                      can modify the style settings through the editing button
+                      in the upper right corner of the block.If you need to
+                      learn more, please visit<a
+                        target="_blank"
+                        href="http://twitter.github.io/bootstrap/base-css.html"
+                        >Basic CSS.</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li style="display: none" class="boxes" id="elmBase">
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >对齐 <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="text-left">Left to the left</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="text-center">Center</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="text-right">Keep Right</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >标记 <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class=""><a href="#" rel="muted">Disable</a></li>
+                        <li class="">
+                          <a href="#" rel="text-warning">warn</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="text-error">mistake</a>
+                        </li>
+                        <li class=""><a href="#" rel="text-info">hint</a></li>
+                        <li class="">
+                          <a href="#" rel="text-success">success</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">title</div>
+                  <div class="view">
+                    <h3 contenteditable="true">
+                      h3. This is a visual layout system.
+                    </h3>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >对齐 <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="text-left">Left to the left</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="text-center">Center</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="text-right">Keep Right</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >标记 <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class=""><a href="#" rel="muted">Disable</a></li>
+                        <li class="">
+                          <a href="#" rel="text-warning">warn</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="text-error">mistake</a>
+                        </li>
+                        <li class=""><a href="#" rel="text-info">hint</a></li>
+                        <li class="">
+                          <a href="#" rel="text-success">success</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <a class="btn btn-mini" href="#" rel="lead">Lead</a>
+                  </span>
+                  <div class="preview">paragraph</div>
+                  <div class="view" contenteditable="true">
+                    <p>
+                      <em>Git</em>It is a distributed version control system.<b
+                        >Linus Torvalds</b
+                      >Written, used as the management of Linux kernel
+                      code.After launch, Git has also achieved great success in
+                      other projects, especially in the Ruby community.
+                    </p>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">address</div>
+                  <div class="view">
+                    <address contenteditable="true">
+                      <strong>Twitter, Inc.</strong><br />
+                      795 Folsom Ave, Suite 600<br />
+                      San Francisco, CA 94107<br />
+                      <abbr title="Phone">P:</abbr> (123) 456-7890
+                    </address>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration">
+                    <a class="btn btn-mini" href="#" rel="pull-right">右对齐</a>
+                  </span>
+                  <div class="preview">Reference block</div>
+                  <div class="view clearfix">
+                    <blockquote contenteditable="true">
+                      <p>GitHub is a global open source community.</p>
+                      <small
+                        >Key words
+                        <cite title="Source Title">Open source</cite></small
+                      >
+                    </blockquote>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="unstyled">no style</a>
+                    <a class="btn btn-mini" href="#" rel="inline">Embed</a>
+                  </span>
+                  <div class="preview">Disadvantage</div>
+                  <div class="view">
+                    <ul contenteditable="true">
+                      <li>news</li>
+                      <li>Sports competition</li>
+                      <li>Entertainment gossip</li>
+                      <li>Cutting -edge technology</li>
+                      <li>Global Finance</li>
+                      <li>Weather forecast</li>
+                      <li>Real estate home</li>
+                      <li>Online game</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="unstyled">no style</a>
+                    <a class="btn btn-mini" href="#" rel="inline">Embed</a>
+                  </span>
+                  <div class="preview">Orderly list</div>
+                  <div class="view">
+                    <ol contenteditable="true">
+                      <li>news</li>
+                      <li>Sports competition</li>
+                      <li>Entertainment gossip</li>
+                      <li>Cutting -edge technology</li>
+                      <li>Global Finance</li>
+                      <li>Weather forecast</li>
+                      <li>Real estate home</li>
+                      <li>Online game</li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="dl-horizontal"
+                      >竖向对齐</a
+                    >
+                  </span>
+                  <div class="preview">A detailed description</div>
+                  <div class="view">
+                    <dl contenteditable="true">
+                      <dt>Rolex</dt>
+                      <dd>
+                        The founder of Rolex was Hans Wellsdorf, and in 1908 he
+                        registered Rolex as a trademark in Switzerland.
+                      </dd>
+                      <dt>Vacheron Constantin</dt>
+                      <dd>
+                        Jiang Shidon, which was founded in 1775, has a history
+                        of 250 years.
+                      </dd>
+                      <dd>
+                        It is one of the longest and longest durations in the
+                        world.
+                      </dd>
+                      <dt>IWC</dt>
+                      <dd>
+                        Founded in 1868, IWC is known as "mechanical watch
+                        expert".
+                      </dd>
+                      <dt>Cartier</dt>
+                      <dd>
+                        Cartier has a history of more than 150 years and is a
+                        manufacturer of French jewelry gold and silver jewelry.
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="table-striped">stripe</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="table-bordered">frame</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <a class="btn btn-mini" href="#" rel="table-hover"
+                      >Mouse indicator</a
+                    >
+                    <a class="btn btn-mini" href="#" rel="table-condensed"
+                      >compact</a
+                    >
+                  </span>
+                  <div class="preview">sheet</div>
+                  <div class="view">
+                    <table class="table" contenteditable="true">
+                      <thead>
+                        <tr>
+                          <th>serial number</th>
+                          <th>product</th>
+                          <th>Due time</th>
+                          <th>state</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>TB - Monthly</td>
+                          <td>01/04/2012</td>
+                          <td>Default</td>
+                        </tr>
+                        <tr class="success">
+                          <td>1</td>
+                          <td>TB - Monthly</td>
+                          <td>01/04/2012</td>
+                          <td>Approved</td>
+                        </tr>
+                        <tr class="error">
+                          <td>2</td>
+                          <td>TB - Monthly</td>
+                          <td>02/04/2012</td>
+                          <td>Declined</td>
+                        </tr>
+                        <tr class="warning">
+                          <td>3</td>
+                          <td>TB - Monthly</td>
+                          <td>03/04/2012</td>
+                          <td>Pending</td>
+                        </tr>
+                        <tr class="info">
+                          <td>4</td>
+                          <td>TB - Monthly</td>
+                          <td>04/04/2012</td>
+                          <td>Call in to confirm</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="form-inline">Embed</a>
+                  </span>
+                  <div class="preview">submit Form</div>
+                  <div class="view">
+                    <form>
+                      <fieldset>
+                        <legend contenteditable="true">Table item</legend>
+                        <label contenteditable="true">Signature</label>
+                        <input type="text" placeholder="Type something…" />
+                        <span class="help-block" contenteditable="true"
+                          >Fill in the help information here.</span
+                        >
+                        <label class="checkbox" contenteditable="true">
+                          <input type="checkbox" /> Consciousness
+                        </label>
+                        <button
+                          type="submit"
+                          class="btn"
+                          contenteditable="true"
+                        >
+                          submit
+                        </button>
+                      </fieldset>
+                    </form>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="form-inline">Embed</a>
+                  </span>
+                  <div class="preview">search bar</div>
+                  <div class="view">
+                    <form class="form-search">
+                      <input class="input-medium search-query" type="text" />
+                      <button type="submit" class="btn" contenteditable="true">
+                        Find
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"> </span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">Vertical form</div>
+                  <div class="view">
+                    <form class="form-horizontal">
+                      <div class="control-group">
+                        <label
+                          class="control-label"
+                          for="inputEmail"
+                          contenteditable="true"
+                          >Mail</label
+                        >
+                        <div class="controls">
+                          <input
+                            id="inputEmail"
+                            placeholder="Email"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        <label
+                          class="control-label"
+                          for="inputPassword"
+                          contenteditable="true"
+                          >password</label
+                        >
+                        <div class="controls">
+                          <input
+                            id="inputPassword"
+                            placeholder="Password"
+                            type="password"
+                          />
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        <div class="controls">
+                          <label class="checkbox" contenteditable="true">
+                            <input type="checkbox" />
+                            Remember me
+                          </label>
+                          <button
+                            type="submit"
+                            class="btn"
+                            contenteditable="true"
+                          >
+                            Land
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration">
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="btn-primary">Focus on</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="btn-info">information</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="btn-success">success</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="btn-warning">remind</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="btn-danger">Danger</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="btn-inverse">Reverse</a>
+                        </li>
+                        <li class=""><a href="#" rel="btn-link">Link</a></li>
+                      </ul>
+                    </span>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >尺寸 <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class=""><a href="#" rel="btn-large">Big</a></li>
+                        <li class="active"><a href="#" rel="">middle</a></li>
+                        <li class=""><a href="#" rel="btn-small">small</a></li>
+                        <li class="">
+                          <a href="#" rel="btn-mini">miniature</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <a class="btn btn-mini" href="#" rel="btn-block">Passage</a>
+                    <a class="btn btn-mini" href="#" rel="disabled">Disable</a>
+                  </span>
+                  <div class="preview">Button</div>
+                  <div class="view">
+                    <button class="btn" type="button" contenteditable="true">
+                      Button
+                    </button>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration">
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="img-rounded">Rounded corner</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="img-circle">Circle</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="img-polaroid">Framework</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">picture</div>
+                  <div class="view"><img alt="140x140" src="img/a.jpg" /></div>
+                </div>
+              </li>
+            </ul>
+            <ul class="nav nav-list accordion-group">
+              <li class="nav-header">
+                <i class="icon-plus icon-white"></i> Component
+                <div class="pull-right popover-info">
+                  <i class="icon-question-sign"></i>
+                  <div class="popover fade right">
+                    <div class="arrow"></div>
+                    <h3 class="popover-title">help</h3>
+                    <div class="popover-content">
+                      Drag and drop components to the layout box. After you are
+                      dragged in, you can set the component style. View here to
+                      get more help
+                      <a
+                        target="_blank"
+                        href="http://twitter.github.io/bootstrap/components.html"
+                        >Components.</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li style="display: none" class="boxes" id="elmComponents">
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration">
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >direction<span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active">
+                          <a href="#" rel="">Horizontal</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="btn-group-vertical">Vertical</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">Button group</div>
+                  <div class="view">
+                    <div class="btn-group">
+                      <button class="btn" type="button">
+                        <i class="icon-align-left"></i>
+                      </button>
+                      <button class="btn" type="button">
+                        <i class="icon-align-center"></i>
+                      </button>
+                      <button class="btn" type="button">
+                        <i class="icon-align-right"></i>
+                      </button>
+                      <button class="btn" type="button">
+                        <i class="icon-align-justify"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="dropup">上拉</a>
+                  </span>
+                  <div class="preview">Drop-down menu</div>
+                  <div class="view">
+                    <div class="btn-group">
+                      <button class="btn" contenteditable="true">Action</button>
+                      <button
+                        data-toggle="dropdown"
+                        class="btn dropdown-toggle"
+                      >
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" contenteditable="true">
+                        <li><a href="#">operate</a></li>
+                        <li><a href="#">Set column</a></li>
+                        <li><a href="#">More settings</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-submenu">
+                          <a tabindex="-1" href="#">more options</a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">operate</a></li>
+                            <li><a href="#">Set column</a></li>
+                            <li><a href="#">More settings</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="">
+                          <a href="#" rel="nav-tabs">Wireframe</a>
+                        </li>
+                        <li class=""><a href="#" rel="nav-pills">Nail</a></li>
+                      </ul>
+                    </span>
+                    <a class="btn btn-mini" href="#" rel="nav-stacked"
+                      >Switch format</a
+                    >
+                  </span>
+                  <div class="preview">navigation</div>
+                  <div class="view">
+                    <ul class="nav nav-tabs" contenteditable="true">
+                      <li class="active"><a href="#">front page</a></li>
+                      <li><a href="#">material</a></li>
+                      <li class="disabled"><a href="#">information</a></li>
+                      <li class="dropdown pull-right">
+                        <a
+                          href="#"
+                          data-toggle="dropdown"
+                          class="dropdown-toggle"
+                          >下拉 <b class="caret"></b
+                        ></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">operate</a></li>
+                          <li><a href="#">Set column</a></li>
+                          <li><a href="#">More settings</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">split line</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="well">Embed</a>
+                  </span>
+                  <div class="preview">Navigation list</div>
+                  <div class="view">
+                    <ul class="nav nav-list" contenteditable="true">
+                      <li class="nav-header">List title</li>
+                      <li class="active"><a href="#">front page</a></li>
+                      <li><a href="#">Library</a></li>
+                      <li><a href="#">application</a></li>
+                      <li class="nav-header">function list</li>
+                      <li><a href="#">material</a></li>
+                      <li><a href="#">set up</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">help</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">Bread navigation</div>
+                  <div class="view">
+                    <ul class="breadcrumb" contenteditable="true">
+                      <li>
+                        <a href="#">Homepage</a> <span class="divider">/</span>
+                      </li>
+                      <li>
+                        <a href="#">Category</a> <span class="divider">/</span>
+                      </li>
+                      <li class="active">theme</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >size <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="">
+                          <a href="#" rel="pagination-large">Big</a>
+                        </li>
+                        <li class="active"><a href="#" rel="">middle</a></li>
+                        <li class="">
+                          <a href="#" rel="pagination-small">small</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="pagination-mini">miniature</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >位置 <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active">
+                          <a href="#" rel="">Left to the left</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="pagination-centered">居middle</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="pagination-right">Keep Right</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">Pages</div>
+                  <div class="view">
+                    <div class="pagination">
+                      <ul contenteditable="true">
+                        <li><a href="#">Last page</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">Next page</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="badge-success">success</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="badge-warning">warn</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="badge-important">important</a>
+                        </li>
+                        <li class=""><a href="#" rel="badge-info">hint</a></li>
+                        <li class="">
+                          <a href="#" rel="badge-inverse">reciprocal</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">Text tag</div>
+                  <div class="view">
+                    <span class="label" contenteditable="true">Text tag</span>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="badge-success">success</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="badge-warning">warn</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="badge-important">important</a>
+                        </li>
+                        <li class=""><a href="#" rel="badge-info">hint</a></li>
+                        <li class="">
+                          <a href="#" rel="badge-inverse">reciprocal</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">Micro -standard</div>
+                  <div class="view">
+                    <span class="badge" contenteditable="true">1</span>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="well">Embed</a>
+                  </span>
+                  <div class="preview">Overview</div>
+                  <div class="view">
+                    <div class="hero-unit" contenteditable="true">
+                      <h1>Hello, world!</h1>
+                      <p>
+                        This is a visual layout template. You can click on the
+                        text in the template to modify it. You can also modify
+                        the text rich text by clicking the pop -up Edit box. The
+                        DRAG block can be sorted.
+                      </p>
+                      <p>
+                        <a class="btn btn-primary btn-large" href="#"
+                          >See more »</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">Page title</div>
+                  <div class="view">
+                    <div class="page-header" contenteditable="true">
+                      <h1>Page title example <small>Here</small></h1>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">text</div>
+                  <div class="view">
+                    <h2 contenteditable="true">title</h2>
+                    <p contenteditable="true">
+                      This visual layout program runs more perfectly on the
+                      HTML5 browser and can achieve automatic localization
+                      preservation. Even if the close has the webpage, the next
+                      time you can still restore the previous operation.
+                    </p>
+                    <p>
+                      <a class="btn" href="#" contenteditable="true"
+                        >see more »</a
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">Preview list</div>
+                  <div class="view">
+                    <ul class="thumbnails">
+                      <li class="span4">
+                        <div class="thumbnail">
+                          <img alt="300x200" src="img/people.jpg" />
+                          <div class="caption" contenteditable="true">
+                            <h3>Vonorman structure</h3>
+                            <p>
+                              Also known as Princeton structure, it is a memory
+                              structure that combines program instruction memory
+                              and data memory.The program instruction storage
+                              address and data storage address point to the
+                              different physical locations of the same memory.
+                            </p>
+                            <p>
+                              <a class="btn btn-primary" href="#">Browse</a>
+                              <a class="btn" href="#">share</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="span4">
+                        <div class="thumbnail">
+                          <img alt="300x200" src="img/city.jpg" />
+                          <div class="caption" contenteditable="true">
+                            <h3>Harvard structure</h3>
+                            <p>
+                              The Harvard structure is a memory structure that
+                              separates program instructions and data storage.
+                              Its main feature is to store programs and data in
+                              different storage spaces for independent location.
+                            </p>
+                            <p>
+                              <a class="btn btn-primary" href="#">Browse</a>
+                              <a class="btn" href="#">share</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="span4">
+                        <div class="thumbnail">
+                          <img alt="300x200" src="img/sports.jpg" />
+                          <div class="caption" contenteditable="true">
+                            <h3>Improved Harvard structure</h3>
+                            <p>
+                              The improved Harvard structure has an independent
+                              address bus and an independent data bus. The two
+                              bus are repeatedly reused by the program memory
+                              and data memory to make the structure more
+                              compact.
+                            </p>
+                            <p>
+                              <a class="btn btn-primary" href="#">Browse</a>
+                              <a class="btn" href="#">share</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration">
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="progress-info">hint</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="progress-success">success</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="progress-warning">warn</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="progress-danger">Danger</a>
+                        </li>
+                      </ul>
+                    </span>
+                    <a class="btn btn-mini" href="#" rel="progress-striped"
+                      >stripe</a
+                    >
+                    <a class="btn btn-mini" href="#" rel="active">Animation</a>
+                  </span>
+                  <div class="preview">progress bar</div>
+                  <div class="view">
+                    <div class="progress">
+                      <div class="bar" style="width: 60%"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="well">Embed</a>
+                  </span>
+                  <div class="preview">Embedded media</div>
+                  <div class="view">
+                    <div class="media">
+                      <a href="#" class="pull-left">
+                        <img src="img/a_002.jpg" class="media-object" />
+                      </a>
+                      <div class="media-body" contenteditable="true">
+                        <h4 class="media-heading">Embedding media title</h4>
+                        Please try to use HTML5 compatible video format and
+                        video code to achieve video playback to achieve a better
+                        experience effect.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="nav nav-list accordion-group">
+              <li class="nav-header">
+                <i class="icon-plus icon-white"></i> Interactive component
+                <span class="label label-important">NEW!</span>
+                <div class="pull-right popover-info">
+                  <i class="icon-question-sign"></i>
+                  <div class="popover fade right">
+                    <div class="arrow"></div>
+                    <h3 class="popover-title">help</h3>
+                    <div class="popover-content">
+                      Drag and drop component to layout container. After
+                      dragging in, you can configure the display style. If you
+                      have any questions, you can access
+                      <a
+                        target="_blank"
+                        href="http://twitter.github.io/bootstrap/javascript.html"
+                        >JavaScript.</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li style="display: none" class="boxes mute" id="elmJS">
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <div class="preview">Cover window</div>
+                  <div class="view">
+                    <!-- Button to trigger modal -->
+                    <a
+                      id="myModalLink"
+                      href="#myModalContainer"
+                      role="button"
+                      class="btn"
+                      data-toggle="modal"
+                      contenteditable="true"
+                      >Trigger the cover window</a
+                    >
+
+                    <!-- Modal -->
+                    <div
+                      id="myModalContainer"
+                      class="modal hide fade"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="myModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-header">
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-hidden="true"
+                        >
+                          ×
+                        </button>
+                        <h3 id="myModalLabel" contenteditable="true">title</h3>
+                      </div>
+                      <div class="modal-body">
+                        <p contenteditable="true">Display information</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          class="btn"
+                          data-dismiss="modal"
+                          aria-hidden="true"
+                          contenteditable="true"
+                        >
+                          Close
+                        </button>
+                        <button class="btn btn-primary" contenteditable="true">
+                          Save Settings
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <a class="btn btn-mini" href="#" rel="navbar-inverse"
+                      >Inverse</a
+                    >
+                    <!--a class="btn btn-mini" href="#" rel="navbar-fixed-top">Navbar fixed top</a-->
+                  </span>
+                  <div class="preview">Navigation Bar</div>
+                  <div class="view">
+                    <div class="navbar">
+                      <div class="navbar-inner">
+                        <div class="container-fluid">
+                          <a
+                            data-target=".navbar-responsive-collapse"
+                            data-toggle="collapse"
+                            class="btn btn-navbar"
+                          >
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </a>
+                          <a href="#" class="brand" contenteditable="true"
+                            >网站名</a
+                          >
+                          <div
+                            class="nav-collapse collapse navbar-responsive-collapse"
+                          >
+                            <ul class="nav" contenteditable="true">
+                              <li class="active"><a href="#">Homepage</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li class="dropdown">
+                                <a
+                                  data-toggle="dropdown"
+                                  class="dropdown-toggle"
+                                  href="#"
+                                  >下拉菜单 <b class="caret"></b
+                                ></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Playing navigation 1</a></li>
+                                  <li><a href="#">Playing navigation 2</a></li>
+                                  <li><a href="#">other</a></li>
+                                  <li class="divider"></li>
+                                  <li class="nav-header">Label</li>
+                                  <li><a href="#">Link 1</a></li>
+                                  <li><a href="#">Link 2</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                            <ul class="nav pull-right" contenteditable="true">
+                              <li><a href="#">Linked on the right</a></li>
+                              <li class="divider-vertical"></li>
+                              <li class="dropdown">
+                                <a
+                                  data-toggle="dropdown"
+                                  class="dropdown-toggle"
+                                  href="#"
+                                  >Drop-down menu <b class="caret"></b
+                                ></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Playing navigation 1</a></li>
+                                  <li><a href="#">Playing navigation 2</a></li>
+                                  <li><a href="#">other</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="#">Link 3</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- /.nav-collapse -->
+                        </div>
+                      </div>
+                      <!-- /navbar-inner -->
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button>
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >Location <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class="">
+                          <a href="#" rel="tabs-below">bottom</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="tabs-left">Left to the left</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="tabs-right">Keep Right</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">Switch card</div>
+                  <div class="view">
+                    <div class="tabbable" id="myTabs">
+                      <!-- Only required for left/right tabs -->
+                      <ul class="nav nav-tabs">
+                        <li class="active">
+                          <a
+                            href="#tab1"
+                            data-toggle="tab"
+                            contenteditable="true"
+                            >first part</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            href="#tab2"
+                            data-toggle="tab"
+                            contenteditable="true"
+                            >the second part</a
+                          >
+                        </li>
+                      </ul>
+                      <div class="tab-content">
+                        <div
+                          class="tab-pane active"
+                          id="tab1"
+                          contenteditable="true"
+                        >
+                          <p>Part of the first part.</p>
+                        </div>
+                        <div class="tab-pane" id="tab2" contenteditable="true">
+                          <p>Part of the second part.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration">
+                    <span class="btn-group">
+                      <a
+                        class="btn btn-mini dropdown-toggle"
+                        data-toggle="dropdown"
+                        href="#"
+                        >style <span class="caret"></span
+                      ></a>
+                      <ul class="dropdown-menu">
+                        <li class="active"><a href="#" rel="">default</a></li>
+                        <li class=""><a href="#" rel="alert-info">hint</a></li>
+                        <li class="">
+                          <a href="#" rel="alert-error">mistake</a>
+                        </li>
+                        <li class="">
+                          <a href="#" rel="alert-success">success</a>
+                        </li>
+                      </ul>
+                    </span>
+                  </span>
+                  <div class="preview">Prompt box</div>
+                  <div class="view">
+                    <div class="alert" contenteditable="true">
+                      <button type="button" class="close" data-dismiss="alert">
+                        ×
+                      </button>
+                      <h4>hint!</h4>
+                      <strong>warn!</strong> Please pay attention to your
+                      personal privacy and safety.
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">Accordion switching</div>
+                  <div class="view">
+                    <div class="accordion" id="myAccordion">
+                      <div class="accordion-group">
+                        <div class="accordion-heading">
+                          <a
+                            class="accordion-toggle"
+                            data-toggle="collapse"
+                            data-parent="#myAccordion"
+                            href="#collapseOne"
+                            contenteditable="true"
+                          >
+                            Tab #1
+                          </a>
+                        </div>
+                        <div
+                          id="collapseOne"
+                          class="accordion-body collapse in"
+                        >
+                          <div class="accordion-inner" contenteditable="true">
+                            function block...
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-group">
+                        <div class="accordion-heading">
+                          <a
+                            class="accordion-toggle"
+                            data-toggle="collapse"
+                            data-parent="#myAccordion"
+                            href="#collapseTwo"
+                            contenteditable="true"
+                          >
+                            Tab #2
+                          </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                          <div class="accordion-inner" contenteditable="true">
+                            function block...
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box box-element ui-draggable">
+                  <a href="#close" class="remove label label-important"
+                    ><i class="icon-remove icon-white"></i>delete</a
+                  >
+                  <span class="drag label"><i class="icon-move"></i>drag</span>
+                  <span class="configuration"
+                    ><button
+                      type="button"
+                      class="btn btn-mini"
+                      data-target="#editorModal"
+                      role="button"
+                      data-toggle="modal"
+                    >
+                      edit
+                    </button></span
+                  >
+                  <div class="preview">Rotation diagram</div>
+                  <div class="view">
+                    <div class="carousel slide" id="myCarousel">
+                      <ol class="carousel-indicators">
+                        <li
+                          class="active"
+                          data-slide-to="0"
+                          data-target="#myCarousel"
+                        ></li>
+                        <li
+                          data-slide-to="1"
+                          data-target="#myCarousel"
+                          class=""
+                        ></li>
+                        <li
+                          data-slide-to="2"
+                          data-target="#myCarousel"
+                          class=""
+                        ></li>
+                      </ol>
+                      <div class="carousel-inner">
+                        <div class="item active">
+                          <img alt="" src="img/1.jpg" />
+                          <div class="carousel-caption" contenteditable="true">
+                            <h4>baseball</h4>
+                            <p>
+                              Baseball is a kind of ball movement that is
+                              characterized by sticky balls, collective, and
+                              confrontation, which is particularly prevalent in
+                              the United States and Japan.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <img alt="" src="img/2.jpg" />
+                          <div class="carousel-caption" contenteditable="true">
+                            <h4>surf</h4>
+                            <p>
+                              Surfing is a sport that uses waves to use its
+                              superb skills and balance ability to fight the
+                              waves.Athletes stand on the surfing plate, or use
+                              a water movement that controls the waves such as
+                              abdominal plates, kneeling boards, inflatable
+                              rubber pads, rowing boats, kayaks, etc.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <img alt="" src="img/3.jpg" />
+                          <div class="carousel-caption" contenteditable="true">
+                            <h4>bike</h4>
+                            <p>
+                              Sports with bicycles as a tool race.At the first
+                              Olympic Games in 1896, it was listed as a formal
+                              competition.The Rings Race is the most famous
+                              World Bicycle Championship.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <a
+                        data-slide="prev"
+                        href="#myCarousel"
+                        class="left carousel-control"
+                        >‹</a
+                      >
+                      <a
+                        data-slide="next"
+                        href="#myCarousel"
+                        class="right carousel-control"
+                        >›</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--/span-->
+        <div class="demo ui-sortable" style="min-height: 304px">
+          <div class="lyrow">
+            <a href="#close" class="remove label label-important"
+              ><i class="icon-remove icon-white"></i>remove</a
+            >
+            <span class="drag label"><i class="icon-move"></i>drag</span>
+            <div class="preview">9 3</div>
+            <div class="view">
+              <div class="row-fluid clearfix">
+                <div class="span12 column ui-sortable">
+                  <div
+                    class="box box-element ui-draggable"
+                    style="display: block"
+                  >
+                    <a href="#close" class="remove label label-important"
+                      ><i class="icon-remove icon-white"></i>delete</a
+                    >
+                    <span class="drag label"
+                      ><i class="icon-move"></i>drag</span
+                    >
+                    <span class="configuration"
+                      ><button
+                        type="button"
+                        class="btn btn-mini"
+                        data-target="#editorModal"
+                        role="button"
+                        data-toggle="modal"
+                      >
+                        edit
+                      </button>
+                      <a class="btn btn-mini" href="#" rel="well">Embed</a>
+                    </span>
+                    <div class="preview">Overview</div>
+                    <div class="view">
+                      <div class="hero-unit" contenteditable="true">
+                        <p>A wind that wanders only in one valley;</p>
+                        <p>A dike only protects a bay of stars.</p>
+                        <p>
+                          Every time I look up at the starry sky, I always close
+                          my eyes,
+                        </p>
+                        <p>Because the most beautiful one is not in the sky.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end demo -->
+        <!--/span-->
+        <div id="download-layout">
+          <div class="container-fluid"></div>
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/.fluid-container-->
+    <div class="modal hide fade" role="dialog" id="editorModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>edit</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          <textarea id="contenteditor"></textarea>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a id="savecontent" class="btn btn-primary" data-dismiss="modal"
+          >Save</a
+        >
+        <a class="btn" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+    <div class="modal hide fade" role="dialog" id="downloadModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>download</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          The clean HTML that has been generated below, you can copy and paste
+          the code to your project.
+        </p>
+        <div class="btn-group">
+          <button type="button" id="fluidPage" class="active btn btn-info">
+            <i class="icon-fullscreen icon-white"></i> Adaptive width
+          </button>
+          <button type="button" class="btn btn-info" id="fixedPage">
+            <i class="icon-screenshot icon-white"></i> Fixed width
+          </button>
+        </div>
+        <br />
+        <br />
+        <p>
+          <textarea></textarea>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+    <div class="modal hide fade" role="dialog" id="shareModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Save</h3>
+      </div>
+      <div class="modal-body">Successfully saved</div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?5578a27c6c70bf44e7509eda26137f4c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  </body>
+</html>
