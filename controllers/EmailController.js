@@ -101,7 +101,7 @@ const postEmail = (req, res) => {
         secure: false,
         auth: {
             user: config.mail,
-            pass: '##MSD07##shubhajit'
+            pass: '##MSD07##sayak'
         },
     });
 
